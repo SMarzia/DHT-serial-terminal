@@ -1,0 +1,29 @@
+#include <DHT.h>
+
+//DHT dht1;
+//int dht;
+#define  DHT11_PIN 9
+#define  DHTTYPE DHT11
+
+DHT dht (DHT11_PIN, DHT11);
+
+void setup (){
+  //pinMode(dht_pin, INPUT);
+  Serial.begin(9600);
+  dht.begin();
+}
+void loop () {
+  float temperature = dht.readTemperature();
+  float humidity = dht.readHumidity();
+
+  if (isnan(temperature)|| isnan(humidity)){
+   Serial.println ("failed");
+   return;
+  }
+  //int chk = dht.read11(dht_pin);
+  Serial.print("temp is");
+  Serial.print(temperature);
+  Serial.print("humidity is");
+  Serial.print(humidity);
+  delay(1000);
+}
